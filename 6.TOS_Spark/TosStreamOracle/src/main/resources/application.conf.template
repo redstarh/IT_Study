@@ -1,0 +1,50 @@
+///////////////////////////////////////////////////////////
+// I    D : OracleStreamApp
+// CREATE : 2018/08/31
+// UPDATE : 2018/08/31
+///////////////////////////////////////////////////////////
+
+# -Dconfig.file=application.conf 를 활용하여 프로파티 파일을 변경할 수 있음
+
+
+application {
+
+  sparkConfig {
+    "spark.app.name": "OracleStreamApp"
+//    "spark.master": "local[2]"
+    "spark.streaming.stopGracefullyOnShutdown": "true",
+    "spark.debug.maxToStringFields": "100"
+  }
+
+  batchDuration: 10
+
+  checkpointDir: "/tos/checkpointDir/OracleStreamApp/11"
+
+  input_topic {
+    topics: "save"
+    charset: "UTF-8"
+  }
+
+  kafkaConsumer {
+    "bootstrap.servers": "SKT-CLIPHDP02:6667"
+    "key.deserializer": "org.apache.kafka.common.serialization.StringDeserializer"
+    "value.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer"
+    "group.id": "tos_TosStreamOracle_consumer_1"
+  }
+
+  database {
+    jdbcUrl: "jdbc:oracle:thin:@150.2.181.115:1521:CLIT"
+    connProp {
+      driver: "oracle.jdbc.driver.OracleDriver"
+      user: "apps"
+      password: "dhvjfld12#"
+    }
+  }
+
+  zookeeper {
+    servers: "skt-cliphdp02:2181"
+    znode-root = "/spark-apps/"
+    znode-name = "tos-stream-oracle"
+  }
+
+}

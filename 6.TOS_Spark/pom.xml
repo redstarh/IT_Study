@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sktelecom.tos.stream</groupId>
+	<artifactId>TosStream</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>TosStreamBase</module>
+		<module>TosStreamChannel</module>
+		<module>TosStreamHive</module>
+		<module>TosStreamOracle</module>
+		<module>TosStreamR2K</module>
+		<module>TosStreamSwing</module>
+		<module>TosStreamTRMS</module>
+		<module>TosStreamURT</module>
+	</modules>
+
+	<developers>
+		<developer>
+			<id>P132970</id>
+			<name>Jhonson Choi</name>
+			<email>js.choi@nuriggumsoft.com</email>
+			<organization>Nuriggum soft</organization>
+			<organizationUrl>http://www.nuriggumsoft.com</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Asia/Seoul</timezone>
+		</developer>
+		<developer>
+			<id>P128890</id>
+			<name>bwyoon</name>
+		</developer>
+		<developer>
+			<id>P117052</id>
+			<name>khkim</name>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>jira</system>
+		<url>http://devops.sktelecom.com/mytask/secure/Dashboard.jspa</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://150.2.181.117:28080/</url>
+	</ciManagement>
+
+	<scm>
+		<developerConnection>http://devops.sktelecom.com/mygit/scm/tos001/tos-rtetl-project.git</developerConnection>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>releases</id>
+			<name>tos release repo</name>
+			<url>http://devops.sktelecom.com/myrepo/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>snapshots</id>
+			<name>tos snapshot repo</name>
+			<url>http://devops.sktelecom.com/myrepo/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<properties>
+		<encoding>UTF-8</encoding>
+		<scala.version>2.11.8</scala.version>
+		<spark.core.version>2.3.0</spark.core.version>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>local</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>${scala.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-compiler</artifactId>
+				<version>${scala.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-core_2.11</artifactId>
+				<version>${spark.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-sql_2.11</artifactId>
+				<version>${spark.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-streaming_2.11</artifactId>
+				<version>${spark.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+				<version>${spark.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-hive_2.11</artifactId>
+				<version>${spark.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.typesafe</groupId>
+				<artifactId>config</artifactId>
+				<version>1.3.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.ceedubs</groupId>
+				<artifactId>ficus_2.11</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.noraui</groupId>
+				<artifactId>ojdbc8</artifactId>
+				<version>12.2.0.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.typesafe.play</groupId>
+				<artifactId>play-json_2.11</artifactId>
+				<version>2.6.9</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.4</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-compiler</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-sql_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-hive_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.typesafe</groupId>
+			<artifactId>config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.ceedubs</groupId>
+			<artifactId>ficus_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.noraui</groupId>
+			<artifactId>ojdbc8</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.typesafe.play</groupId>
+			<artifactId>play-json_2.11</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<testSourceDirectory>src/test/scala</testSourceDirectory>
+		<!-- <resources> <resource> <directory>src/main/resources</directory> <excludes> 
+			<exclude>log4j.properties</exclude> <exclude>application.conf</exclude> </excludes> 
+			</resource> </resources> -->
+		<plugins>
+			<!-- <plugin> <groupId>org.scala-tools</groupId> <artifactId>maven-scala-plugin</artifactId> 
+				<executions> <execution> <goals> <goal>compile</goal> <goal>testCompile</goal> 
+				</goals> </execution> </executions> <configuration> <scalaVersion>${scala.version}</scalaVersion> 
+				<args> <arg>-target:jvm-1.8</arg> </args> </configuration> </plugin> -->
+			<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>com.sktelecom.tos.stream:*</include>
+								</includes>
+							</artifactSet>
+							<!-- <filters> <filter> <artifact>com.sktelecom.tos.stream:*</artifact> 
+								<excludes> <exclude>log4j.properties</exclude> <exclude>application.conf</exclude> 
+								</excludes> </filter> </filters> -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
